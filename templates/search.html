@@ -1,0 +1,31 @@
+{% extends "Layout.html" %}
+
+{% block title %}Search{% endblock %}
+
+{% block main %}
+	  <!-- Icons Grid -->
+  <section class="masthead text-white text-center">
+        <div class="container contact-form ">
+            <form class="text-center text-secondary border border-light p-5" action='/search' method="post">
+              <p class="h4 mb-4">Welcom to Our "Book Review" Website</p>
+               <div class="form-group input-group input-group-lg"">
+                 <input autocomplete="off" autofocus type="text" name="search" class="form-control input-lg text-center" placeholder="Auther name | Book title | ISBN number"/>
+               </div>
+
+                <div class="form-group ">
+                  <button type="submit" name="btn" class="btnContact btn btn-primary">Search!</button>
+                </div>
+            </form>
+        </div>
+  </section>
+
+    <script type="text/javascript">
+        document.querySelector('form').onsubmit = () =>{
+          if (!document.querySelector('input').value){
+            alert('Must Provide Book Data');
+            return false;
+          }
+          return true;
+        };
+    </script>
+{% endblock %}

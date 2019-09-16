@@ -1,0 +1,30 @@
+{% extends "Layout.html" %}
+
+
+{% block title %}Results{% endblock %}
+
+{% block main %}
+	{% if INFO|count == 0 %}
+	  	<div class="container contact-form ">
+		   <form class="text-center text-danger border border-light p-5" action='/search' method="post">
+			   <p class="h4 mb-4">No Results Found</p>
+			</form>
+	    </div>
+	{% else %}
+	  <table class="table">
+		<thead>
+		  <tr>
+		     <th class="text-success" scope="col">Found Result</th>
+		  </tr>
+		</thead>
+		  <tbody>
+
+		  	{% for info in INFO %}
+		      <tr>
+                <td scope="row"><a href="/book/{{info["isbn"]}}"><b>{{ info["title"] }}</b> for {{ info["auther"] }}</a></td>
+		       </tr>
+		    {% endfor %}
+		  </tbody>
+		</table>
+	{% endif %}
+{% endblock %}

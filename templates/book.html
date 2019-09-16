@@ -1,0 +1,81 @@
+{% extends "Layout.html" %}
+
+
+{% block title %}
+	{% for info in INFO %}
+		{{info['title']}}
+	{% endfor %}
+{% endblock %}
+
+{% block main %}
+	  <table class="table">
+		<thead>
+		  <tr>
+		     <th class="text-success" scope="col">Book Information</th>
+		  </tr>
+		</thead>
+		  <tbody>
+
+		  	{% for info in INFO%}
+		      <tr>
+                <td scope="row"><b>Auther:</b> {{info["auther"]}}</td>
+		       </tr>
+		       <tr>
+		       	    <td scope="row"><b>Title:</b> {{info["title"]}}</td>
+		       </tr>
+		       <tr>
+		       	    <td scope="row"><b>ISBN:</b> {{info["isbn"]}}</td>
+		       </tr>
+		       <tr>
+		       	    <td scope="row"><b>Year:</b> {{info["year"]}}</td>
+		       </tr>
+		     {% endfor %}
+		  </tbody>
+		</table>
+		<div class="dropdown-divider"></div>
+
+    <h4 class="alert alert-warning">Users Reviews</h4>
+              <!-- REVIEW LIST -->
+        <div id="userReviews">
+            <h2></h2>
+            {% for review in reviews %}
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1" style="color:burlywood">{{review['usr']}} said...</h6>
+                        <small>{{review['time']}}</small>
+                    </div>
+                    <p class="mb-1">{{review['comment']}}</p>
+                    <small>Rated: {{review['ratings']}}</small>
+                </a>
+                <div class="dropdown-divider"></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <h5>Make your own review!</h5>
+
+    <div>
+        <!-- REVIEW FORM -->
+        <form method="POST" class="form-border">
+            <div class="form-row">
+                <div class="form-group col-sm">
+                    <label for="rating">Rate</label>
+                    <select name="rating" class="form-control" required>
+                        {% for i in range(5) %}
+                        	<option value="{{i + 1}}">{{i + 1}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-sm-6">
+                    <div class="input-group">
+                        <textarea name="comment" placeholder="Write a review here!" class="form-control" rows="6" cols="50" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group col-sm">
+                    <button class="btn btn-success" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+{% endblock %}

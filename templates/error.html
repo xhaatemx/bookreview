@@ -1,0 +1,16 @@
+{% extends "Layout.html" %}
+
+{% block title %}Failure{% endblock %}
+
+{% block main %}
+    <header>
+        <div class="alert alert-danger border text-center" role="alert">
+           {{ message }}
+        </div>
+        <div class=" container form-group">
+        	<p>
+        		<a href={{hyperlink}}>GO Back</a>	
+        	</p>
+        </div>
+    </header>
+{% endblock %}
