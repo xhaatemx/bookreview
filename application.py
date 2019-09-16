@@ -235,9 +235,11 @@ def book(isbn):
 		return render_template("book.html", INFO=map(dict, set(tuple(sorted(l.items())) for l in bookInfo)), reviews=reviews)
 
 
-@app.route("/api/<isbn>", methods=['GET'])
+@app.route("/api/book/<isbn>", methods=['GET'])
 @login_required
 def API(isbn):
+
+	api = {"title", "auther", "year", "isbn"}
 	with sqlite3.connect('book.db') as localedb:
 		cur = localedb.cursor()
 		row = cur.execute(
@@ -245,19 +247,15 @@ def API(isbn):
 				SELECT title, auther, year, isbn FROM info WHERE isbn = '{}';
 			'''
 			.format(isbn))
+		for apis in row:
+			api = {
+				"title": apis[0],
+				"auther": apis[1],
+				"year": apis[2],
+				"isbn": apis[3]	
+			}
 
-	lenght = row.fetchall()
-	# Error checking
-	if row.rowcount != 1:
-		return jsonify({"Error": "Invalid book ISBN"}), 422
-
-	# Fetch result from RowProxy    
-	tmp = row.fetchone()
-
-	# Convert to dict
-	result = dict(tmp.items())
-
-	return jsonify(result)
+	return jsonify(api)
 
 if __name__ == '__main__':
 	app.run()
