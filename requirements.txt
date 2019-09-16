@@ -1,12 +1,5 @@
-flask
-flask_session
-tempfile
-werkzeug.exceptions
-werkzeug.security
-sqlalchemy
-helpers
-sqlite3
-requests
-os
-json
+Flask
+Flask-Session
+psycopg2-binary
+SQLAlchemy
 gunicorn
